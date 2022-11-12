@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid p-10 grid-cols-1 lg:grid-cols-3 sm:grid-cols-1">
+    
+    <div class="rounded shadow-lg">
+        <div>
+            {% if user.profile.phone %}   
+            <a class="text-white bg-green-500 px-5 py-2" href="{% url 'users:update' user.profile.id %}">Update Profile</a> 
+            <a class="text-white bg-green-700 px-5 py-2" href="{% url 'users:exam' user.profile.id %}">Proceed to Exam</a>
+             {% endif %}   
+        </div>
+        <div class="font-bold text-xl mb-2 px-6 py-4">{{user.username}} 
+           
+        </div>
+        {% if user.profile.phone %}
+                <div>
+                    
+                </div>
+                <div class="font-bold text-xl mb-2 px-6 py-4">📞 ({{user.profile.code}}) {{user.profile.phone}}</div>
+                
+        {% else %}
+        <div class="m-10"><a class="text-indigo-500" href="{% url 'users:createprofile' %}">Complete Profile</a></div>
+
+        {% endif %}
+    </div>
+</div>
+    
+{% endblock %}

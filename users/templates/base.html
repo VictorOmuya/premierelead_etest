@@ -1,0 +1,38 @@
+{% load static %}
+<html>
+
+  <head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+  </head>
+   <body>
+    <nav class="bg-white shadow-lg">
+      
+          <div class="flex">
+            <div>
+              <a href="#" class="flex px-4 py-4">
+              <!--<img class="h-8 w-8" src="{% static '' %}" alt=""> -->
+              <span class="text-black-500 font-semibold text-lg">PremiereLead</span>
+          
+              </a>
+              </div>
+              <div style="float:right; display: flex; margin-left: 55%;">
+   
+                {% if user.is_authenticated %}
+                  <a class="py-4 px-80 text-gray-500 font-semibold" href="{% url 'users:logout' %}">Logout</a>
+                  
+
+
+                {% else %}
+                  <a class="py-4 px-80 text-gray-500 font-semibold" href="{% url 'users:login' %}">Login</a>
+                {% endif %}
+              </div>
+          </div>
+       
+    </nav>
+
+        {% block content %}
+
+
+        {% endblock %}
+   </body>
+</html>
