@@ -9,15 +9,36 @@ from .sms import send_sms
 
 # Create your views here.
 def register(request):
+    form = NewUserForm()
+    error = ""
+    usernames = []
+    allusers = User.objects.all()
+    usern = allusers.values('username')
+    for keys in usern:
+        usernames.append(keys['username'])
+    
+    
     if request.method =='POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             return redirect('users:login')
+
+        elif request.POST.get('username') in usernames:
+            error = 'username already exists'
+            print(error)
+            
+        elif request.POST.get('password') != request.POST.get('password2'):
+            error = "problem registering user, enter password again!"
+            print(error)
+            
+        elif len(request.POST.get('password')) < 8:
+            error = "password must be at least 8 characters"
         
-    form = NewUserForm()
+    
     context={
         'form':form,
+        'error' : error
     }
     return render(request,'register.html',context)
 

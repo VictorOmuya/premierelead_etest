@@ -16,7 +16,8 @@ def send_sms(number, mess):
     num = number
     account_sid = "ACa59320f2dad74cafe284fd22f01f7476"
     auth_tok = env("auth_token")
-    #auth_token= auth_tok[14:-1]
+    
+    #auth_token = auth_tok[14:-1]
     
     client = Client(account_sid, auth_tok)
 
