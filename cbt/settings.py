@@ -34,7 +34,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['etest.herokuapp.com']
+#ALLOWED_HOSTS = ['etest.herokuapp.com']
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'countdowntimer_model',
   
 ]
 
@@ -92,7 +93,7 @@ DATABASES = {
         'PASSWORD' : env('PASSWORD'),
         'HOST': env('HOST'),
         'PORT' : env('PORT'),
-        'URI' : env('URI')
+        #'URI' : env('URI')
     }
 }
 

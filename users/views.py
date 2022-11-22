@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from .models import Questions, Profile
 from .sms import send_sms
-
+import time
 
 # Create your views here.
 def register(request):
@@ -45,12 +45,24 @@ def register(request):
 def error(request):
     return render(request, 'error.html')
 
-@login_required
+def countdown(t):
+    
+    while t:
+        mins, secs = divmod(t, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        print(timer)
+        time.sleep(1)
+        t -= 1
+      
+        return timer
+
+
 def exam(request, id):
     score = 0
     questions = Questions.objects.all()
     user_answer = ""
-    
+
+
     context ={
         'question':questions,
     }
@@ -73,7 +85,8 @@ def exam(request, id):
 
         score_message = "Your score : %s" %score
         try:
-            send_sms(phone_no, score_message)
+            print(score_message)
+            #send_sms(phone_no, score_message)
         except:
             return redirect("users:error")
         

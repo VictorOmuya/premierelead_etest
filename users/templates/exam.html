@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Exam {% endblock %}
 
 {% block content %}
 
+<div>
+    <div>Time Left:</div>
+    <div id="countdown-box" class="text-center mt-3 h1">
+        <span id="time"></span>
+    </div>
+</div>
+
 <div class="justify-center p-5 ">
-    <form action="{% url 'users:exam' user.profile.id %}" method="post" id="form-id">
+    <form action="{% url 'users:exam' user.profile.id %}" method="post">
 
         {% csrf_token %}
-        <div class="rounded shadow-lg px-10 ml-50 text-base mb-2">
+        <div class="rounded shadow-lg px-10 ml-50 text-base mb-2"> 
+
             {% for q in question %}
                 <p>{{q.question}}</p>
                     <div class="py-2">
@@ -22,9 +31,13 @@
        
         </div>
         
-        <input type="submit", value="submit" class="bg-green-500 text-white px-5 py-2">
+        <input type="submit", value="submit", onclick= "clickEvent()" class="bg-green-500 text-white px-5 py-2" id="button">
     
         </form>
       </div>
 
+  {% endblock %}
+
+  {% block scripts %}
+  <script src="{% static 'jscript.js' %}"></script>
   {% endblock %}
