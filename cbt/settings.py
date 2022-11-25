@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'countdowntimer_model',
+    'crispy_forms',
   
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,3 +149,9 @@ MEDIA_URL ='/media/'
 LOGIN_REDIRECT_URL ='users:profile'
 LOGIN_URL = 'users:login'
 
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME') #(ex: us-east-2)
+AWS_SES_REGION_ENDPOINT =env('AWS_SES_REGION_ENDPOINT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')

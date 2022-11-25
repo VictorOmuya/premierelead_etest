@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container p-5">
+
+        
+    <div class="w-100">
+        <p class="text-muted">
+            <h1>You Account has now been verified. Proceed to
+            <a href="{% url 'users:login' %}" class="text-primary ml-2">Login </a>
+        </h1>
+        </p>
+    </div>
+</div>
+</div>
+{% endblock body %}

@@ -1,15 +1,11 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %} Exam {% endblock %}
+{% load static %}
 
 {% block content %}
 
-<div>
-
-    <div id="countdown-box" class="text-center mt-3 h1">
-        <span id="time"></span>
-    </div>
+<div id="countdown-box" class="text-center mt-3 h1">
+    <span id="time"></span>
 </div>
 
 <div class="justify-center p-5 ">
@@ -18,7 +14,7 @@
         {% csrf_token %}
         <div class="rounded shadow-lg px-10 ml-50 text-base mb-2"> 
 
-            {% for q in question %}
+            {% for q in page %}
                 <p>{{q.question}}</p>
                     <div class="py-2">
                         <input type="radio" name="{{ q.question }}" value="{{ q.optionA }}" id="form-id"> {{ q.optionA }}  </input><br>
@@ -35,10 +31,20 @@
     
         </form>
       </div>
-    </div>
+   
 
-  {% endblock %}
+{% if page.has_previous %}
+    <a href="{% url 'users:newexam' user.profile.id %}?page={{ page.previous_page_number }}" id="prev"
+    onclick="myFunction()">Previous</a>
+{% endif %}
 
-  {% block scripts %}
-  <script src="{% static 'jscript.js' %}"></script>
-  {% endblock %}
+{% if page.has_next %}
+    <a href="{% url 'users:newexam' user.profile.id %}?page={{ page.next_page_number }}" id="next"
+    onclick="myFunction()">Next</a>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'jscript.js' %}"></script>
+{% endblock %}

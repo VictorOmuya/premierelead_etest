@@ -9,9 +9,13 @@ class Profile(models.Model):
         return self.user.username
     
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    code = models.CharField(max_length=3, default="+234")
-    phone = models.CharField(max_length=10, default="9999999999")
-    score = models.IntegerField()
+    auth_token = models.CharField(max_length=100, default="")
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    code = models.CharField(max_length=3, default="")
+    phone = models.CharField(max_length=10, default="")
+    score = models.IntegerField(default=0)
+    exam_taken = models.BooleanField(default=False)
     
 class Questions(models.Model):
     

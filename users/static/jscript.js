@@ -1,7 +1,7 @@
 if(localStorage.getItem("count_timer")){
     var count_timer = localStorage.getItem("count_timer");
 } else {
-    var count_timer = 60*0.2;
+    var count_timer = 60*30;
 }
 var minutes = parseInt(count_timer/60);
 var seconds = parseInt(count_timer%60);
@@ -32,3 +32,21 @@ setTimeout("countDownTimer()",1000);
 function clickEvent() {
     console.log("Click Event triggered")
 }
+
+window.history.pushState(null, "", window.location.href);
+window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+};
+
+
+var myButton1 = document.getElementById("next")
+var myButton2 = document.getElementById("prev")
+
+myButton1.onclick = function() {myFunction()};
+function myFunction() {
+    console.log("clicked")
+}
+myButton2.onclick = function() {myFunction()};
+function myFunction() {
+    console.log("clicked")
+   }
