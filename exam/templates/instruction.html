@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Instruction {% endblock %}
+<div>
+    
+</div>
+
+{% block content %}
+
+<div style="padding:25px; width: 70%; padding-left:20%;">
+    <h1 style="font-size: 30px; font-weight: bolder;">Instruction</h1>
+
+    <p style="font-size: 20px; padding-bottom: 20px;" > <i> Please read carefully before taking the exam!</i></p>
+
+    <p>This exam is prepared to measure your knowledge and to confirm that you have deliberately 
+        worked hard in reading and practise so as to earn our certificate. Below is a list of things you must take note of:
+    </p>
+
+    <p>
+        
+        <ol style="padding:25px;">
+            <li>1. You must click the submit button if you finish before the allocated time.</li><br>
+            <li>2. If you were unable to finish before time, the exam will be submitted authomatically.</li><br>
+            <li>3. Make sure you have provided your accessible phone number because that is where you will find your score.
+                So, incase you are not sure you provided your correct phone line, kindly navigate to your 
+                <a href="{% url 'users:profile' %}" style="color: rgb(218, 16, 16);">profile</a> page
+                to update it.
+            </li><br>
+            <li>4. You will pass this exam if you have a score of 80% or higher.</li><br>
+            <li>5. You will only be allowed to retake this exam after two months.</li><br>
+            <li>6. You must not leave the examination page without until you have submitted.</li>
+
+        </ol>
+    </p>
+
+   
+</div>
+<div style="padding-left:22%;">
+    <a class="text-white bg-blue-800 px-5 py-2" href="{% url 'exam:exam' user.profile.id %}" 
+    onclick="window.open(this.href,'popUpWindow','scrollbars=yes,menubar=no'); return false;">Start Exam</a>
+</div>
+{% endblock %}

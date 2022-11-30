@@ -12,19 +12,12 @@ class Profile(models.Model):
     auth_token = models.CharField(max_length=100, default="")
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    code = models.CharField(max_length=3, default="")
+    code = models.CharField(max_length=4, default="")
     phone = models.CharField(max_length=10, default="")
     score = models.IntegerField(default=0)
     exam_taken = models.BooleanField(default=False)
     
-class Questions(models.Model):
-    
-    question = models.CharField(max_length=200, default= "Enter question")
-    optionA = models.CharField(max_length=200, default= "Option A")
-    optionB = models.CharField(max_length=200, default= "Option B")
-    optionC = models.CharField(max_length=200, default= "Option C")
-    optionD = models.CharField(max_length=200, default= "Option D")
-    Answer = models.CharField(max_length=200, default= "Answer")
+
     
 
     

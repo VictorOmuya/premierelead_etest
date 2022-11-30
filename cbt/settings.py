@@ -31,10 +31,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['etest.herokuapp.com']
+ALLOWED_HOSTS = ['etest.herokuapp.com']
 
 
 # Application definition
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'exam',
     'crispy_forms',
   
 ]
@@ -95,7 +98,7 @@ DATABASES = {
         'PASSWORD' : env('PASSWORD'),
         'HOST': env('HOST'),
         'PORT' : env('PORT'),
-        #'URI' : env('URI')
+        'URI' : env('URI')
     }
 }
 
@@ -149,9 +152,19 @@ MEDIA_URL ='/media/'
 LOGIN_REDIRECT_URL ='users:profile'
 LOGIN_URL = 'users:login'
 
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_SES_REGION_NAME = env('AWS_SES_REGION_NAME') #(ex: us-east-2)
-AWS_SES_REGION_ENDPOINT =env('AWS_SES_REGION_ENDPOINT')
+AWS_SES_REGION_NAME = 'us-east-1' 
+AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+
+
+#EMAIL_BACKEND = 'django_ses.SESBackend'
+#AWS_ACCESS_KEY_ID = 'AKIA3ZPCK5Y4OR4JQOPW'
+#AWS_SECRET_ACCESS_KEY = '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'
+#AWS_SES_REGION_NAME = 'us-east-1' 
+#AWS_SES_REGION_ENDPOINT ='email.us-east-1.amazonaws.com'
+#EMAIL_HOST_USER = 'premiereleadtech@gmail.com'
+
+

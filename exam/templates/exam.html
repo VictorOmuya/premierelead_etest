@@ -13,7 +13,7 @@
 </div>
 
 <div class="justify-center p-5 ">
-    <form action="{% url 'users:exam' user.profile.id %}" method="post">
+    <form action="{% url 'exam:exam' user.profile.id %}" method="post">
 
         {% csrf_token %}
         <div class="rounded shadow-lg px-10 ml-50 text-base mb-2"> 

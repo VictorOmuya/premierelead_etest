@@ -2,9 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import NewUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.paginator import Paginator, EmptyPage
-from .models import Questions, Profile
-from .sms import send_sms
+from .models import Profile
 import uuid
 from django.conf import settings
 from django.core.mail import send_mail
@@ -62,75 +60,21 @@ def register(request):
             user_obj.set_password(password)
             #user_obj.save()
             auth_token = str(uuid.uuid4())
+            #print('http://127.0.0.1:8000/verify/'+auth_token)
             profile_obj = Profile.objects.create(user = user , auth_token = auth_token)
             profile_obj.save()
-            send_mail_after_registration(email , auth_token)
+            #send_mail_after_registration(email , auth_token)
             return redirect('/token')
         
     context={
         'form':form,
     }
     return render(request,'register.html',context)
-
-def error(request):
-    return render(request, 'error.html')
-
-def exam(request, id):
-    member = Profile.objects.get(id = id)
-    
-    if member.exam_taken == False:
-    
-        score = 0
-        questions = Questions.objects.all()
-        user_answer = ""
-        context ={
-            'question':questions,
-        }
-        if request.method == 'POST':
-            for q in questions:
-                user_answer = request.POST.get(q.question)
-                print(user_answer)
-                if q.Answer == user_answer:
-                    score += 5
-                    print(score)
-                else:
-                    score += 0
-                    
-            
-            phone_no = member.phone
-            
-            member.score = score
-            member.exam_taken = True
-            member.save()
-
-            score_message = "Your score : %s" %score
-            try:
-                print(score_message)
-                #send_sms(phone_no, score_message)
-            except:
-                return redirect("users:error")
-            
-            return redirect("users:success")
-    else:
-        return redirect("users:taken")
             
     
-    return render(request, "exam.html", context)
-
-def sendscore(request):
-    member = Profile.objects.get(id = id)
-    if request.method == 'POST':  
-            phone_no = member.phone
-        
-    
-    return render(request, "exam.html")
-
 @login_required
 def profile(request):
     return render(request,'profile.html')
-
-def success(request):
-    return render(request,'success.html')
 
 #def create_profile(request):
 #    if request.method =='POST':
@@ -164,33 +108,6 @@ def update(request, id):
 
 def taken(request):
     return render(request, 'taken.html')
-
-
-def newexam(request, id):
-    obj = Questions.objects.all()
-    page_n = request.GET.get('page', 1)
-    p = Paginator(obj, 1)
-    
-    try:
-        page = p.page(page_n)
-    except EmptyPage:
-        page = p.page(1)
-        
-    context = {
-        'page' : page
-    }
-    
-    if request.method == 'POST':
-        for q in obj:
-            user_answer = request.POST.get(q.question)
-            print(user_answer)
-            if q.Answer == user_answer:
-                score += 5
-                print(score)
-            else:
-                score += 0
-    
-    return render(request, 'newexam.html', context)
 
 
 def send_mail_after_registration(email , token):
