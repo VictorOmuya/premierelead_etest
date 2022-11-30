@@ -159,10 +159,3 @@ AWS_SES_REGION_NAME = 'us-east-1'
 AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 
-
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 3ca1e8964edcd50dfe2444d43749ffa00926aa02
