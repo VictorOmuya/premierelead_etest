@@ -160,11 +160,6 @@ AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 
 
-#EMAIL_BACKEND = 'django_ses.SESBackend'
-#AWS_ACCESS_KEY_ID = 'AKIA3ZPCK5Y4OR4JQOPW'
-#AWS_SECRET_ACCESS_KEY = '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'
-#AWS_SES_REGION_NAME = 'us-east-1' 
-#AWS_SES_REGION_ENDPOINT ='email.us-east-1.amazonaws.com'
-#EMAIL_HOST_USER = 'premiereleadtech@gmail.com'
+
 
 
