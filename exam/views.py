@@ -40,8 +40,8 @@ def exam(request, id):
 
             score_message = "Your score : %s" %score
             try:
-                #print(score_message)
-                send_sms(phone_no, score_message)
+                print(score_message)
+                #send_sms(phone_no, score_message)
             except:
                 return redirect("exam:error")
             
