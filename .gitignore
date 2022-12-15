@@ -1,6 +1,5 @@
 .env
 node_modules
-Procfile
 runtime.txt
 db.sqlite3
 .dockerignore
