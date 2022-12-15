@@ -2,4 +2,5 @@
 node_modules
 Procfile
 runtime.txt
-db.sqlite
+db.sqlite3
+.dockerignore
