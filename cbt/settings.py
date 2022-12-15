@@ -15,6 +15,7 @@ import environ
 import os, sys
 import dj_database_url
 from decouple import config
+from django.core.management.utils import get_random_secret_key
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,16 +30,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv("DEBUG", "False") == "True"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -87,14 +91,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cbt.wsgi.app'
+WSGI_APPLICATION = 'cbt.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 if DEVELOPMENT_MODE is True:
     DATABASES = {
@@ -110,7 +113,7 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
-DATABASES['Default'] = dj_database_url.config()
+
 
 
 # Password validation
@@ -149,9 +152,11 @@ USE_TZ = True
 
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
@@ -161,8 +166,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL ='/media/'
 LOGIN_REDIRECT_URL ='users:profile'
 LOGIN_URL = 'users:login'
 
